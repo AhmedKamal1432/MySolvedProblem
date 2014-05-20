@@ -1,0 +1,80 @@
+/*
+ * image_coding.cpp
+ *
+ *  Created on: Nov 17, 2013
+ *      Author: root
+ */
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+#include<iostream>
+#include<sstream>
+#include<cstring>
+#include<vector>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<queue>
+#include<utility>
+#include<algorithm>
+#include<functional>
+
+using namespace std;
+
+#define vi vector<int>
+#define ii pair<int,int>
+#define vii vector< pair<int,int> >
+
+int main()
+{
+  //  freopen("input.txt","r",stdin);
+  //  freopen("output.txt","w",stdout);
+char arr[20][20];
+int tst;
+scanf("%d",&tst);
+for (int ts = 0; ts < tst; ++ts)
+{
+	int R,C,M,N;
+	int lett[27];
+	char c;
+	memset(lett,0,sizeof(lett));
+	scanf("%d %d %d %d\n",&R,&C,&M,&N);
+	for (int i = 0; i < R; ++i) {
+		for(int k=0;k<C;k++)
+		{
+			scanf("%c",&c);
+			arr[i][k]=c;
+			lett[c-'A']++;
+		}
+		scanf("\n");
+	}
+
+	int total_mx=0,temp;
+
+	int *ptr = max_element(lett,lett+27);
+	int max=*(ptr);
+	*ptr=0;
+	total_mx+=max;
+	while(1)
+	{
+		int *ptr = max_element(lett,lett+27);
+	    int temp=*(ptr);
+	    if(temp==max)
+	    {
+	    	total_mx+=temp;
+	    *ptr=0;
+	    }
+	    else
+	    	break;
+	}
+	int ans=total_mx*M + (R*C - total_mx)*N;
+
+	printf("Case %d: %d\n",ts+1,ans);
+}
+
+return 0;
+}
+
+
+

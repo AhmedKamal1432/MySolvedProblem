@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html><head>
+<title>Problem C: Vito's family</title>
+<meta name="description" content="Problem C: Vito's family">
+<meta name="keywords" content="htmlatex">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="STYLESHEET" href="10041_data/htmlatex.css">
+</head>
+<body bgcolor="#FFFFFF" lang="EN">
+
+<h1><br clear="ALL"><center><table bgcolor="#0060F0"><tbody><tr><td><b><font color="#C0FFFF" size="5">&nbsp;<a name="SECTION0001000000000000000000">
+Problem C: Vito's family</a>&nbsp;</font></b></td></tr></tbody></table></center>
+</h1>
+
+<p>
+
+</p><h2><font color="#0070E8"><a name="SECTION0001001000000000000000">
+Background</a>&nbsp;</font>
+</h2>
+The world-known gangster Vito Deadstone is moving to New York. He has
+a very big family there, all of them living in Lamafia Avenue. Since
+he will visit all his relatives very often, he is trying to find a
+house close to them. 
+
+<p>
+
+</p><h2><font color="#0070E8"><a name="SECTION0001002000000000000000">
+Problem</a>&nbsp;</font>
+</h2>
+Vito wants to minimize the total distance to
+all of them and has blackmailed you to write a 
+program that solves his problem.
+
+<p>
+
+</p><h2><font color="#0070E8"><a name="SECTION0001003000000000000000">
+Input</a>&nbsp;</font>
+</h2>
+The input consists of several test cases. The first line contains 
+the number of test cases.
+
+<p>
+For each test
+case you will be given the integer number of relatives <i>r</i> (
+<!-- MATH: $0 < r < 500$ -->
+0 &lt; <i>r</i> &lt; 500)
+and the street numbers (also integers) 
+<!-- MATH: $s_1, s_2, \ldots, s_i, \ldots, s_r$ -->
+<img src="10041_data/10041img1.gif" alt="$s_1, s_2, \ldots, s_i, \ldots, s_r$" align="MIDDLE" border="0" height="30" width="150">
+where
+they live (
+<!-- MATH: $0 < s_i < 30000$ -->
+0 &lt; <i>s</i><sub><i>i</i></sub> &lt; 30000 ). Note that several relatives could live in
+the same street number.
+
+</p><p>
+
+</p><h2><font color="#0070E8"><a name="SECTION0001004000000000000000">
+Output</a>&nbsp;</font>
+</h2>
+For each test case your program must write the minimal sum of
+distances from the optimal Vito's house to each one of his
+relatives. The distance between two street numbers <i>s</i><sub><i>i</i></sub> and <i>s</i><sub><i>j</i></sub> is 
+
+<!-- MATH: $d_{ij}= |s_i-s_j|$ -->
+<i>d</i><sub><i>ij</i></sub>= |<i>s</i><sub><i>i</i></sub>-<i>s</i><sub><i>j</i></sub>|.
+
+<p>
+
+</p><h2><font color="#0070E8"><a name="SECTION0001005000000000000000">
+Sample Input</a>&nbsp;</font>
+</h2>
+<pre>2
+2 2 4 
+3 2 4 6
+</pre>
+<h2><font color="#0070E8"><a name="SECTION0001006000000000000000">
+Sample Output</a>&nbsp;</font>
+</h2>
+<pre>2
+4
+</pre>
+
+<p>
+<br></p><hr>
+<address>
+<i>Miguel Revilla</i>
+<br><i>2000-11-19</i>
+</address>
+
+
+
+</body></html>
