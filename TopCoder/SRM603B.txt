@@ -1,0 +1,58 @@
+/*
+ * by Ahmd Kamal
+*/
+
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+#include<iostream>
+#include<sstream>
+#include<cstring>
+#include<vector>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<queue>
+#include<utility>
+#include<algorithm>
+#include<functional>
+
+using namespace std;
+
+typedef long long int LL ;
+#define vi vector<int>
+#define ii pair<int,int>
+#define vii vector< pair<int,int> >
+#define sc(x) scanf("%d",&x)
+double const Epsilon = 2.22045e-016;
+
+
+class SplitIntoPairs
+{
+public:
+	int makepairs(vector <int> arr	, int num)
+	{
+		vi odd,even;
+		int len = arr.size();
+		for (int i = 0; i < len; ++i) {
+			if(arr[i]<0)
+				odd.push_back(abs(arr[i]));
+			else
+				even.push_back(arr[i]);
+		}
+		if(odd.size()%2 == 0)
+			return len/2;
+		else
+		{
+			int n1 = *min_element(odd.begin(),odd.end());
+			int n2 =  *min_element(even.begin(),even.end());
+			if((long)n1*n2 <= abs(num))
+				return len/2;
+			else
+				return (len/2)-1;
+		}
+	}
+
+};
+
