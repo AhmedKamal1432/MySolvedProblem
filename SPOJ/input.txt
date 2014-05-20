@@ -1,0 +1,16 @@
+1
+ABC0
+ADE0
+#
+1
+A0
+A0
+ABCDE0
+abcde0
+#
+1
+A0
+A0
+ABCDE0
+Abcde0
+#
