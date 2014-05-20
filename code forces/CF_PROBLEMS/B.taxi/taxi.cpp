@@ -1,0 +1,54 @@
+#include <cstdio>
+#include <cmath>
+
+int main()
+{
+ int arr [4];
+ int sampo;
+ for(int i=0;i<4;i++)
+	 arr[i]=0;
+
+ int n;
+ scanf("%d",&n);
+ int x;
+ 
+ for(int i=0; i<n; i++)
+ {
+  scanf(" %d",&x);
+  arr[x-1]++; 
+ }
+
+ int temp;
+ int num_taxi;
+ num_taxi=arr[3];
+ 
+ if(arr[2]==arr[0])
+ {
+  num_taxi += arr[2];
+  num_taxi += ceil((float)arr[1]/2.0);
+ }
+ else if(arr[2]>arr[0])
+ {
+  num_taxi += arr[2];
+  num_taxi += ceil((float)arr[1]/2.0);
+ }
+ else
+ {
+  num_taxi += arr[2];
+   temp=arr[0]-arr[2];
+   if(arr[1]%2==0)
+   {
+    num_taxi+=arr[1]/2;
+	num_taxi += ceil((float)temp/4.0);
+   }
+   else
+   {
+    num_taxi+=ceil((float)arr[1]/2.0);
+	temp-=2;
+    num_taxi += ceil((float)temp/4.0);
+   } 
+ }
+if(num_taxi==0)
+	num_taxi=1;
+ printf("%d",num_taxi);
+}

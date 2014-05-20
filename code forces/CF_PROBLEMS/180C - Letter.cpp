@@ -1,0 +1,67 @@
+/*
+*
+* solved by Ahmed Kamal
+*/
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+#include<iostream>
+#include<sstream>
+#include<cstring>
+#include<vector>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<queue>
+#include<utility>
+#include<algorithm>
+#include<functional>
+
+using namespace std;
+
+typedef long long int LL ;
+#define vi vector<int>
+#define ii pair<int,int>
+#define vii vector< pair<int,int> >
+#define sc(x) scanf("%d",&x)
+double const EPS = 2.22045e-016;
+#define INF (1<<29)
+
+#define ALL(v)				((v).begin()), ((v).end())
+#define SZ(v)				((int)((v).size()))
+#define CLR(v, d)			memset(v, d, sizeof(v))
+#define LOOP(i, n)		for(int i=0;i<(int)(n);++i)
+
+#define PB	push_back
+typedef vector<double>    VD;
+typedef vector<string>    VS;
+int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
+
+int main()
+{
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	//freopen("output.txt", "w", stdout);
+#endif
+
+string s;
+cin>>s;
+int n = SZ(s);
+int arr[100005];
+CLR(arr,0);
+arr[0]=0;
+for(int i = 1; i< n+1;i++){
+	arr[i] = arr[i-1] +((s[i-1] >= 'a')? 1:0) ;
+}
+ int ac=INF;
+LOOP(i,n+1){
+	int p,l;
+	p = arr[i];
+	l = (n - i) - (arr[n]- arr[i]);
+	ac=min(ac,p+l);
+}
+printf("%d\n",ac);
+return 0;
+}
+
