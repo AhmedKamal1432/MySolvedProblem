@@ -1,0 +1,85 @@
+/*
+*
+* solved by Ahmed Kamal
+*/
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+#include<iostream>
+#include<sstream>
+#include<cstring>
+#include<vector>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<queue>
+#include<utility>
+#include<algorithm>
+#include<functional>
+
+using namespace std;
+
+typedef long long int LL ;
+#define vi vector<int> 
+#define ii pair<int,int> 
+#define vii vector< pair<int,int> > 
+#define sc(x) scanf("%d",&x)
+double const EPS = 2.22045e-016;
+#define INF (1<<29)
+
+#define ALL(v)				((v).begin()), ((v).end())
+#define SZ(v)				((int)((v).size()))
+#define CLR(v, d)			memset(v, d, sizeof(v))
+#define LOOP(i, n)		for(int i=0;i<(int)(n);++i)
+#define LOOPP(i,b, n)		for(int i=(b);i<(int)(n);++i)
+
+#define PB	push_back
+typedef vector<double>    VD;
+typedef vector<string>    VS;
+int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
+
+int main(){
+#ifndef ONLINE_JUDGE
+	//freopen("input.txt", "r", stdin);
+	//freopen("output.txt", "w", stdout);
+#endif
+        int n;
+        while(cin>>n){
+            vi base(n,0),end(n,0);
+            LOOP(i,n)
+                sc(base[i]);
+            LOOP(i,n)
+                sc(end[i]);
+            int ot=0;
+            int ei,t=0;
+            LOOP(i,n){
+                t=0;
+                int bi =0;
+                LOOP(tt,n){
+                 if(base[tt] == end[i])
+                     bi =tt;
+                }
+                LOOPP(m,bi+1,n){
+                    LOOP(b,i){
+                        if(base[m]==end[b])
+                            t++;
+                    }
+                }
+                LOOP(k,n){
+                    if(base[k] == end[i]){
+                         ei=k-i+t;
+                         break;
+                    }
+                }
+                
+                if(ei > 0){
+                    ot+=ei;
+                }
+
+            }
+            printf("%d\n",ot);
+        }
+
+return 0; 
+}
