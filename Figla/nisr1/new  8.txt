@@ -1,0 +1,98 @@
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<cmath>
+#include<cstdlib>
+#include<algorithm>
+#include<map>
+#include<vector>
+using namespace std;
+#define REP(i,n) for(int i =0;i< n;i++)
+#define sc(x) scanf("%d",&x);
+#define SZ(s) s.size()
+#define CLR(x,i) memset(x,i,sizeof(x));
+typedef long long int  LL;
+typedef vector<int> vi;
+typedef vector<string> VS;
+int n,m;
+VS arr;
+int count(int r,int c){
+	if(arr[r][c] == 'T')
+		return 0;
+	int count = 0;
+	if(arr[r][c] != '.')
+	   count++;
+	   // up
+	   int i = r-1;
+	   while(i >= 0){
+		   if(arr[i][c] == 'T' || arr[i][c] == 'T')
+			   break;
+		   if(arr[i][c] == 'V'){
+			   count++;
+			   break;
+		   }
+         i--;
+	   }
+	   //down
+	       i = r+1;
+	  	   while(i <n ){
+	  		   if(arr[i][c] == 'T' ||arr[i][c] == 'H')
+	  			   break;
+	  		   if(arr[i][c] == 'V'){
+	  			   count++;
+	  			   break;
+	  		   }
+	           i++;
+	  	   }
+
+	  	  //right
+	  	   int j = c-1;
+	  	   while(j >= 0){
+	  		   if(arr[r][j] == 'T'||arr[r][j] == 'V')
+	  			   break;
+	  		   if(arr[r][j] == 'H'){
+	  			   count++;
+	  			   break;
+	  		   }
+	           j--;
+	  	   }
+
+	  	   //left
+	  	 j = c+1;
+		 while(j <n ){
+	  		  		   if(arr[r][j] == 'T' || arr[r][j] == 'V')
+	  		  			   break;
+	  		  		   if(arr[r][j] == 'H'){
+	  		  			   count++;
+	  		  			   break;
+	  		  		   }
+	  		           j++;
+	  		  	   }
+  return count;
+}
+int main(){
+  freopen("input.in","r",stdin);
+	int t;sc(t);
+	REP(ts,t){
+		sc(n);sc(m);
+		arr.assign(n,"");
+		REP(i,n){
+			cin>>arr[i];
+		}
+
+	    int mx = 0;
+	    int pi,pj;
+	    REP(i,n)
+	      REP(j,m){
+	      int ans=  count(i,j);
+	      if(ans >= mx){
+			  mx=ans;
+              pi=i;pj=j;
+	      }
+	    }
+
+	    printf("Case %d: %d %d %d\n",ts+1,mx,pi,pj);
+	}
+}
+
+
