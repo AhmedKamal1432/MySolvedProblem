@@ -1,4 +1,3 @@
-
 /*
 *
 * solved by Ahmed Kamal
@@ -26,7 +25,7 @@ typedef long long int LL ;
 #define ii pair<int,int0> 
 #define vii vector< pair<int,int> > 
 #define sc(x) scanf("%d",&x)
-double const EPS = 2.22045e-012;
+double const EPS = 2.22045e-016;
 #define INF (1<<29)
 
 #define ALL(v)              ((v).begin()), ((v).end())
@@ -39,35 +38,38 @@ double const EPS = 2.22045e-012;
 typedef vector<double>    VD;
 typedef vector<string>    VS;
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
-
-float p, q, r, s, t,u;
-double calc(double x){
-    double ans = p*exp(-x) + q*sin(x) + r*cos(x) + s*tan(x) + t*x*x + u;
-    return ans;
-}
+int arr[104][104];
+int acc[104][104];
 int main()
 {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     //freopen("output.txt", "w", stdout);
 #endif
-
-        while(cin>>p>>q>>r>>s>>t>>u){
-            double s = 0;
-            double size = 0.5;
-            double c;
-            REP(i,100){
-                 c =calc(s+size)*calc(s); 
-                if(c > 0)
-                    s+=size;
-                size/=2;
-            }
-    
-            if( calc(0) * calc(1) <= 0)
-                printf("%.4f\n",s);
-            else
-                printf("No solution\n");
+        int n;sc(n);
+        REP(i,n){
+            REP(j,n)
+            sc(arr[i][j]);
         }
+        REP(i,n)
+          acc[i][0] = arr[i][0];
+        
+        REP(i,n)
+          LOOP(j,1,n){
+            acc[i][j] = acc[i][j-1]+arr[i][j];
+         }
+        REP(i,n)
+          LOOP(j,1,n){
+            acc[j][i] += acc[j-1][i];
+         }
+        int mx= -(1<<29);
+        REP(i1,n)
+          REP(j1,n)
+           LOOP(i2,i1+1,n)                 
+              LOOP(j2,j1+1,n){
+            int  calc = acc[i2][j2] - ((i1 != 0)?acc[i1-1][j2]:0) - ((j1 != 0)?acc[i2][j1-1]:0)  + ((j1 != 0 && i1 != 0)?acc[i1-1][j1-1]:0);
+            mx= max(mx ,calc);
+            }
+        printf("%d\n",mx);
 return 0; 
 }
-

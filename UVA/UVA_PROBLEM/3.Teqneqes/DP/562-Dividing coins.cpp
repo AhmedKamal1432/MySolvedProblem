@@ -1,4 +1,3 @@
-
 /*
 *
 * solved by Ahmed Kamal
@@ -26,7 +25,7 @@ typedef long long int LL ;
 #define ii pair<int,int0> 
 #define vii vector< pair<int,int> > 
 #define sc(x) scanf("%d",&x)
-double const EPS = 2.22045e-012;
+double const EPS = 2.22045e-016;
 #define INF (1<<29)
 
 #define ALL(v)              ((v).begin()), ((v).end())
@@ -40,11 +39,21 @@ typedef vector<double>    VD;
 typedef vector<string>    VS;
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-float p, q, r, s, t,u;
-double calc(double x){
-    double ans = p*exp(-x) + q*sin(x) + r*cos(x) + s*tan(x) + t*x*x + u;
-    return ans;
+int dp[50001][102];
+int k,n;
+vi arr;
+int back(int w,int i){
+    if(i == n)
+        return abs(2*w - k);
+    if(dp[w][i] != -1)
+        return dp[w][i];
+    int ans =0;
+    ans = back(w,i+1);
+    ans = min( ans , back(w+arr[i],i+1) );
+    
+    return dp[w][i]=ans; 
 }
+
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -52,22 +61,20 @@ int main()
     //freopen("output.txt", "w", stdout);
 #endif
 
-        while(cin>>p>>q>>r>>s>>t>>u){
-            double s = 0;
-            double size = 0.5;
-            double c;
-            REP(i,100){
-                 c =calc(s+size)*calc(s); 
-                if(c > 0)
-                    s+=size;
-                size/=2;
+        int t;sc(t);
+        while(t--){
+            CLR(dp,-1);
+            sc(n);
+            arr.assign(n,0);
+            int sum =0;
+            REP(i,n){
+              sc(arr[i]);
+              sum+=arr[i];
             }
-    
-            if( calc(0) * calc(1) <= 0)
-                printf("%.4f\n",s);
-            else
-                printf("No solution\n");
+            int ans =0;
+            k = sum;
+            ans = back(0,0);
+            printf("%d\n",ans);
         }
 return 0; 
 }
-

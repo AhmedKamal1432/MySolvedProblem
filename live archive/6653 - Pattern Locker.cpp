@@ -1,4 +1,3 @@
-
 /*
 *
 * solved by Ahmed Kamal
@@ -23,10 +22,10 @@ using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
-#define ii pair<int,int0> 
+#define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
 #define sc(x) scanf("%d",&x)
-double const EPS = 2.22045e-012;
+double const EPS = 2.22045e-016;
 #define INF (1<<29)
 
 #define ALL(v)              ((v).begin()), ((v).end())
@@ -39,35 +38,34 @@ double const EPS = 2.22045e-012;
 typedef vector<double>    VD;
 typedef vector<string>    VS;
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
-
-float p, q, r, s, t,u;
-double calc(double x){
-    double ans = p*exp(-x) + q*sin(x) + r*cos(x) + s*tan(x) + t*x*x + u;
-    return ans;
-}
+LL mod = 10000000000007;
+int L,N,M;
 int main()
 {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     //freopen("output.txt", "w", stdout);
 #endif
+    int t; sc(t);
+    REP(ts,t){
+    sc(L);sc(N);sc(M);
+        L *=L;
+        LL ans=0;
 
-        while(cin>>p>>q>>r>>s>>t>>u){
-            double s = 0;
-            double size = 0.5;
-            double c;
-            REP(i,100){
-                 c =calc(s+size)*calc(s); 
-                if(c > 0)
-                    s+=size;
-                size/=2;
-            }
-    
-            if( calc(0) * calc(1) <= 0)
-                printf("%.4f\n",s);
-            else
-                printf("No solution\n");
+        LL h=L;
+        int temp = L;
+        REP(i,N-1){
+          h*=--temp;
+          h%=mod;
         }
-return 0; 
+         // printf("h %lld\n", h);
+        REP(i,(M-N) +1 ){
+           ans+= h;
+           ans =ans% mod;
+           h*=(--temp);
+           h = h%mod;
+       }
+       printf("Case %d: %lld\n",ts+1,ans);
+   }
+   return 0; 
 }
-

@@ -1,4 +1,3 @@
-
 /*
 *
 * solved by Ahmed Kamal
@@ -23,10 +22,10 @@ using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
-#define ii pair<int,int0> 
+#define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
 #define sc(x) scanf("%d",&x)
-double const EPS = 2.22045e-012;
+double const EPS = 2.22045e-016;
 #define INF (1<<29)
 
 #define ALL(v)              ((v).begin()), ((v).end())
@@ -40,34 +39,53 @@ typedef vector<double>    VD;
 typedef vector<string>    VS;
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-float p, q, r, s, t,u;
-double calc(double x){
-    double ans = p*exp(-x) + q*sin(x) + r*cos(x) + s*tan(x) + t*x*x + u;
-    return ans;
+
+const int MaxN =1000005;
+bool isprime[MaxN];
+vector<int> primes ;
+void sieve () {
+    CLR(isprime,true);
+    
+ for(int i = 2 ; i <= MaxN ; i++)
+     if(isprime[i])
+        for(int j = 2*i ; j <= MaxN ; j +=i)
+              isprime[j] = false ;
+for(int i = 2 ; i <= MaxN ; i++ )
+  if(isprime[i])
+    primes.push_back(i);
 }
+
 int main()
 {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     //freopen("output.txt", "w", stdout);
 #endif
+ // printf("MaxN =%d\n",MaxN);
+int t;sc(t);
+char c;
+sieve();
+vi dgp;
+stringstream ss; string s;
+REP(i,SZ(primes)){
+  ss<<primes[i]; ss>>s; ss.clear();
+  int b = 0;
+  REP(k,SZ(s))
+   b += (s[k]-'0');
+  if(isprime[b])
+    dgp.push_back(primes[i]);
 
-        while(cin>>p>>q>>r>>s>>t>>u){
-            double s = 0;
-            double size = 0.5;
-            double c;
-            REP(i,100){
-                 c =calc(s+size)*calc(s); 
-                if(c > 0)
-                    s+=size;
-                size/=2;
-            }
-    
-            if( calc(0) * calc(1) <= 0)
-                printf("%.4f\n",s);
-            else
-                printf("No solution\n");
-        }
+ // printf("primes[i]=%d , b =%d\n",primes[i],b);
+}
+ int x,y;
+REP(ts,t){
+ sc(x);sc(y);
+ int ans = upper_bound(ALL(dgp),y) - lower_bound(ALL(dgp),x);
+ // if(binary_search(ALL(dgp),x))
+ //    ans++;
+ // if(binary_search(ALL(dgp),y))
+ //    ans++;
+ printf("%d\n",ans);
+}
 return 0; 
 }
-
