@@ -40,40 +40,28 @@ typedef vector<double>    VD;
 typedef vector<string>    VS;
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+LL calc(LL n){
+  return n*(n-3)/2;
+}
 int main()
 {
   #ifndef ONLINE_JUDGE
       freopen("input.txt", "r", stdin);
       //freopen("output.txt", "w", stdout);
   #endif
-  int t;sc(t); scanf("\n");
-  REP(ts,t){
-    string s;
-    getline(cin,s);
-    // printf("%s\n",s.c_str() );
-    vi arr;
-    string sn ="";
-    REP(i,SZ(s)){
-      sn ="";
-      while( i < SZ(s) && s[i] != ' '&& s[i] != '\n')
-        sn.push_back(s[i++]);
-      if(SZ(sn) > 0){
-        stringstream ss; ss<<sn; 
-        int temp; ss>>temp;
-        arr.push_back(temp);
-      }
-    }
-    int n = SZ(arr);
-    int ans = 0;
-    // printf("%d\n",n );
-    REP(i,n){
-      LOOP(k ,i+1,n){
-        // printf("arr[i] = %d , arr[k] =%d\n",arr[i],arr[k]);
-       ans = max(ans, gcd(arr[i],arr[k]));
-      }
-    }
-    printf("%d\n",ans ); 
+LL n;
+int t=1;
+while(cin>>n && n != 0){
+  LL s=0,e= (1LL<<30);
+  while(s < e ){
+    LL mid = (s+e)/2;
+      // printf("s = %lld , e = %lld calc = %lld , mid = %lld\n",s,e,calc(mid),mid );
+    if(calc(mid) >= n)
+      e= mid;
+    else
+      s=mid+1;
   }
-
+  printf("Case %d: %lld\n",t++,s );
+}
 return 0; 
 }

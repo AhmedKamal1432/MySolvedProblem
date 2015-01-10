@@ -40,40 +40,45 @@ typedef vector<double>    VD;
 typedef vector<string>    VS;
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+const int MaxN = 1000006;
+bool isprime[MaxN];
+vector<int> primes ;
+void sieve () {
+  CLR(isprime,true);
+   for(int i = 2 ; i <= MaxN ; i++)
+     if(isprime[i])
+        for(int j = 2*i ; j <= MaxN ; j +=i)
+              isprime[j] = false ;
+for(int i = 2 ; i <= MaxN ; i++ )
+  if(isprime[i])
+    primes.push_back(i);
+}
+
+
 int main()
 {
   #ifndef ONLINE_JUDGE
       freopen("input.txt", "r", stdin);
       //freopen("output.txt", "w", stdout);
   #endif
-  int t;sc(t); scanf("\n");
-  REP(ts,t){
-    string s;
-    getline(cin,s);
-    // printf("%s\n",s.c_str() );
-    vi arr;
-    string sn ="";
-    REP(i,SZ(s)){
-      sn ="";
-      while( i < SZ(s) && s[i] != ' '&& s[i] != '\n')
-        sn.push_back(s[i++]);
-      if(SZ(sn) > 0){
-        stringstream ss; ss<<sn; 
-        int temp; ss>>temp;
-        arr.push_back(temp);
+  sieve();
+  int pn = SZ(primes);
+  int n;
+  while(sc(n) != EOF && n != 0){
+    int sq = n+1/2;
+    int ans = -1;
+    REP(i,pn){
+      if(primes[i] > sq)
+        break;
+      if(isprime[n-primes[i] ]){
+        ans = primes[i];
+        break;
       }
     }
-    int n = SZ(arr);
-    int ans = 0;
-    // printf("%d\n",n );
-    REP(i,n){
-      LOOP(k ,i+1,n){
-        // printf("arr[i] = %d , arr[k] =%d\n",arr[i],arr[k]);
-       ans = max(ans, gcd(arr[i],arr[k]));
-      }
-    }
-    printf("%d\n",ans ); 
+    if(ans  == -1)
+      printf("Goldbach's conjecture is wrong.\n");
+    else
+      printf("%d = %d + %d\n",n,ans,n-ans );
   }
-
 return 0; 
 }

@@ -2,21 +2,21 @@
 *
 * solved by Ahmed Kamal
 */
-#include<cstdio>
-#include<cstdlib>
-#include<cmath>
-#include<iostream>
-#include<sstream>
-#include<cstring>
-#include<vector>
-#include<list>
-#include<map>
-#include<set>
-#include<bitset>
-#include<queue>
-#include<utility>
-#include<algorithm>
-#include<functional>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
