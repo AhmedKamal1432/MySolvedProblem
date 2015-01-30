@@ -14,7 +14,6 @@
 #include <set>
 #include <bitset>
 #include <queue>
-#include <stack>
 #include <utility>
 #include <algorithm>
 #include <functional>
@@ -29,33 +28,33 @@ typedef long long int LL ;
 double const EPS = 2.22045e-016;
 #define INF (1<<29)
 
-#define ALL(v)				((v).begin()), ((v).end())
-#define SZ(v)				((int)((v).size()))
-#define CLR(v, d)			memset(v, d, sizeof(v))
-#define REP(i, n)		for(int i=0;i<(int)(n);++i)
-#define LOOP(i,b, n)		for(int i=(b);i<(int)(n);++i)
+#define ALL(v)        ((v).begin()), ((v).end())
+#define SZ(v)       ((int)((v).size()))
+#define CLR(v, d)     memset(v, d, sizeof(v))
+#define REP(i, n)   for(int i=0;i<(int)(n);++i)
+#define LOOP(i,b, n)    for(int i=(b);i<(int)(n);++i)
 
-#define PB	push_back
+#define PB  push_back
 typedef vector<double>    VD;
 typedef vector<string>    VS;
-void print_v(vi arr){
-int n = SZ(arr);
-  REP(i,n)
-    if(i == n-1)
-       printf("%d\n",arr[i] );
-     else
-      printf("%d ", arr[i]);
-}
-
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
-
 
 int main()
 {
 #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+  // freopen("input.txt", "r", stdin);
+  freopen("input.txt", "w", stdout);
 #endif
+printf("20\n");
 
+  int k = 200000;
+REP(i,20){
+  printf("%d\n", k);
+  REP(j,k){
+    printf("%d ",j);
+  }
+  k-=10000;
+  printf("\n");
+}
 return 0; 
 }

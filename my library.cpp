@@ -1,5 +1,23 @@
                        MY LIBRARY
+////pascal triangle
+// 1
+// 1 1
+// 1 2 1
+// 1 3 3 1
+// 1 4 6 4 1
+vector<vector<LL> > pascal;
+void pascal_triangle(int n){
+  pascal.assign(n,vector<LL>(n));
+  REP(i,n)
+    pascal[i][0] = pascal[i][i] = 1;
+  LOOP(i,2,n){
+    LOOP(k,1,i){
+      pascal[i][k] = pascal[i-1][k]+ pascal[i-1][k-1];
+    }
+  }
+}
 
+///////////////////////////////////////////////////////////////
 //accumalitor 2d array
 int ac[MAX][MAX];
 void acumilate()
