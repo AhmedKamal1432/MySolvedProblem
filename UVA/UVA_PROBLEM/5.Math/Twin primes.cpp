@@ -49,6 +49,19 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+vi isprime;
+vi primes;
+int MAX = 20000000;
+void sieve(int n) {
+  isprime.assign(n+2,1);
+  isprime[0] = isprime[1] = 0;
+  for (LL i = 2; i <= n; i++)
+    if (isprime[i]) {
+      for (LL j = i * i; j <= n; j += i) isprime[j] = 0;
+      primes.push_back((int)i);
+    // printf("%lld\n",i );
+    }
+}
 
 int main()
 {
@@ -56,8 +69,21 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+int n;
+sieve(MAX);
+
+int sz = SZ(primes);
+int k = 0;
+vi pr(2000000 , 0);
+REP(i,sz){
+  if(isprime[primes[i]+2]){
+    pr[k++]=primes[i];
+  }
+}
+// printf("k = %d\n", k);
+while(cin>>n ){
+  printf("(%d, %d)\n",pr[n-1],pr[n-1]+2 );
+}
+
 return 0; 
 }

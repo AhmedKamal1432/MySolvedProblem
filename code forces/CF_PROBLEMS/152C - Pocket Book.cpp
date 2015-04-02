@@ -22,9 +22,9 @@
 using namespace std;
 
 typedef long long int LL ;
-#define vi vector<int> 
-#define ii pair<int,int> 
-#define vii vector< pair<int,int> > 
+#define vi vector<int>
+#define ii pair<int,int>
+#define vii vector< pair<int,int> >
 
 #define ALL(v)              ((v).begin()), ((v).end())
 #define SZ(v)               ((int)((v).size()))
@@ -55,6 +55,30 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+LL dp[105];
+VS arr;
+int n,m;
+int MOD = 1000000007;
+int chars = 26;
+LL back(int idx){
+    if(idx == -1){
+        // printf("\n");
+        return 1;
+    }
+    if(dp[idx] != -1)
+        return dp[idx];
+    LL ans = 0;
+    REP(c,chars){
+        REP(i,n){
+            if(arr[i][idx] - 'A' == c){
+                // printf("%c", c+'A');
+                ans+=back(idx-1)%MOD;
+                break;
+            }
+        }
+    }
+    return dp[idx] = ans;
+}
 
 int main()
 {
@@ -62,25 +86,13 @@ int main()
     freopen("input.txt", "r", stdin);
     //freopen("output.txt", "w", stdout);
 #endif
-DSC2(n,k);
-if(n - 1 < k){
-    printf("-1\n");
-    return 0;
-}
-vi arr(n,0);
-REP(i,n)
-    arr[i] = i+1;
 
-int t = n-1;
-for (int i = n-2; i > 0; i-=2)
-{
-    if(t - k <= 1)
-        break;
-    swap(arr[i],arr[i+1]);
-    t-=2;
+SC(n);SC(m);
+arr.assign(n,"");
+CLR(dp,-1);
+REP(i,n){
+    cin>>arr[i];
 }
-if(t-k == 1)
-    swap(arr[0],arr[1]);
-print_v(arr);
-return 0; 
+printf("%d\n",(int)(back(m-1)%MOD) );
+return 0;
 }

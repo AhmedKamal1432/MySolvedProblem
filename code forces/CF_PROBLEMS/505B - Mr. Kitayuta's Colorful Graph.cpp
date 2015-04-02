@@ -50,14 +50,50 @@ int n = SZ(arr);
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
 
+vector<vii > gr;
+int color, target;
+vi visit;
+bool dfs(int u){
+  if(visit[u])
+    return false;
+  if(u == target)
+    return true;
+  visit[u] = true;
+  bool ans = false;
+  REP(i,SZ(gr[u])){
+    if(gr[u][i].second == color)
+      ans |= dfs(gr[u][i].first);
+  }
+  return ans;
+}
 int main()
 {
 #ifndef ONLINE_JUDGE
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+int n,m,q;
+sc(n); sc(m);
+gr.assign(n+1,vii());
+int a,b,c;
+REP(i,m){
+  sc(a);sc(b);sc(c);
+  gr[a].push_back(ii(b,c));
+  gr[b].push_back(ii(a,c));
+}
+sc(q);
+REP(i,q){
+  sc(a);sc(b);
+  int ans = 0;
+  REP(k,m+1){
+    color = k;
+    target = b;
+    visit.assign(n+1,false);
+    if(dfs(a))
+      ans++;
+  }
+  printf("%d\n",ans );
+}
+
 return 0; 
 }

@@ -56,8 +56,42 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+int n,m;sc(n);sc(m);
+vi win(m+1,0);
+vector<vi> begin(n+1,vi());
+vector<vi> finish(n+1,vi());
+priority_queue< int, vector<int>, greater<int> > pq;
+vi ans (n,0);
+vi still(n+1,1);
+REP(i,m){
+  int l,r,x; sc(l);sc(r);sc(x);
+  begin[l-1].push_back(i+1);
+  finish[r-1].push_back(i+1);
+  win[i+1] = x;
+}
+
+REP(i,n){
+
+  // add to piroirty;
+  REP(k,SZ(begin[i]))
+    pq.push(begin[i][k]);
+
+  // add to finish
+  REP(k , SZ(finish[i])){
+    still[finish[i][k]] = 0;
+  }
+  // 4el mn el prioirty
+  while(!still[pq.top()]){
+    pq.pop();
+  }
+printf("pq.top()%d \n", pq.top());
+  if(pq.empty())
+    ans[i] = 0;
+  else
+    ans[i] =win[pq.top()]; 
+}
+// return 0;
+print_v(ans);
+
 return 0; 
 }

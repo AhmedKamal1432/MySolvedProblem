@@ -56,8 +56,44 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+int n,m; 
+sc(n);sc(m);
+if(n > m+1 || m > n*2+2 ){
+  printf("-1\n");
+  return 0;
+}
+
+vi arr;
+if(n == 0){
+  REP(i,m)
+    printf("1");
+  printf("\n");
+  return 0;
+}
+  arr.assign(n,0);
+  int i = 0;
+  bool base = false;
+  if(m-2 > n-1){
+    m-=2; 
+    base = true;
+  }
+  while(m){
+     // printf("m = %d  i = %d\n", m,i);
+    if(i==SZ(arr)){
+      i=0;
+    }
+    arr[i]++;
+    i++;
+    m--;
+}
+// print_v(arr);
+REP(i,SZ(arr)){
+  if(i == 0&& base)
+    printf("11");
+  printf("0");
+  REP(j,arr[i])
+    printf("1");
+}
+printf("\n");
 return 0; 
 }

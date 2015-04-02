@@ -26,17 +26,17 @@ typedef long long int LL ;
 #define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
 
-#define ALL(v)				((v).begin()), ((v).end())
-#define SZ(v)				((int)((v).size()))
-#define CLR(v, d)			memset(v, d, sizeof(v))
-#define REP(i, n)		for(int i=0;i<(int)(n);++i)
-#define LOOP(i,b, n)		for(int i=(b);i<(int)(n);++i)
+#define ALL(v)        ((v).begin()), ((v).end())
+#define SZ(v)       ((int)((v).size()))
+#define CLR(v, d)     memset(v, d, sizeof(v))
+#define REP(i, n)   for(int i=0;i<(int)(n);++i)
+#define LOOP(i,b, n)    for(int i=(b);i<(int)(n);++i)
 
 #define SC(x) scanf("%d",&x)
 #define DSC(x) int x; scanf("%d",&x)
 #define DSC2(x,y) int x,y; scanf("%d %d",&x,&y)
 
-#define PB	push_back
+#define PB  push_back
 #define MP  make_pair
 double const EPS = 2.22045e-016;
 #define INF (1<<29)
@@ -59,9 +59,14 @@ int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 int main()
 {
 #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+  freopen("input.txt", "r", stdin);
+  //freopen("output.txt", "w", stdout);
 #endif
-
+DSC2(n,m);
+if(n > m*2)
+  n=m*2;
+if(m > n*2)
+  m = n*2;
+printf("%d\n",(n+m)/3);
 return 0; 
 }

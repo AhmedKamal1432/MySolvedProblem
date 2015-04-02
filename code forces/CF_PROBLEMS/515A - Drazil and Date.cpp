@@ -25,23 +25,17 @@ typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
-
-#define ALL(v)				((v).begin()), ((v).end())
-#define SZ(v)				((int)((v).size()))
-#define CLR(v, d)			memset(v, d, sizeof(v))
-#define REP(i, n)		for(int i=0;i<(int)(n);++i)
-#define LOOP(i,b, n)		for(int i=(b);i<(int)(n);++i)
-
-#define SC(x) scanf("%d",&x)
-#define DSC(x) int x; scanf("%d",&x)
-#define DSC2(x,y) int x,y; scanf("%d %d",&x,&y)
-
-#define PB	push_back
-#define MP  make_pair
+#define sc(x) scanf("%d",&x)
 double const EPS = 2.22045e-016;
 #define INF (1<<29)
 
+#define ALL(v)        ((v).begin()), ((v).end())
+#define SZ(v)       ((int)((v).size()))
+#define CLR(v, d)     memset(v, d, sizeof(v))
+#define REP(i, n)   for(int i=0;i<(int)(n);++i)
+#define LOOP(i,b, n)    for(int i=(b);i<(int)(n);++i)
 
+#define PB  push_back
 typedef vector<double>    VD;
 typedef vector<string>    VS;
 void print_v(vi arr){
@@ -59,9 +53,21 @@ int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 int main()
 {
 #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+  freopen("input.txt", "r", stdin);
+  //freopen("output.txt", "w", stdout);
 #endif
+LL a,b,n;
+cin>>a>>b>>n;
+a = abs(a);
+b = abs(b);
+a+=b;
+if(n < a)
+  printf("No\n");
+else if((n -a) %2 != 0)
+  printf("No\n");
+else
+  printf("Yes\n");
+
 
 return 0; 
 }

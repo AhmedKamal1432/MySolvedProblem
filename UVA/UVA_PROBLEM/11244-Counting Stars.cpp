@@ -55,32 +55,44 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-
+int m,n;
+VS arr;
+int dx[]={1, -1,  0,  0, 1, -1,  1, -1};
+int dy[]={0,  0,  1, -1, 1,  1, -1, -1};
+bool valid(int i , int j, int k ){
+    if(i + dx[k] >=0 && i + dx[k] < n &&
+        j + dy[k] >= 0 && j + dy[k] < m)
+        if(arr[ i+dx[k] ][j + dy[k]] == '*')
+            return true;
+    return false;
+}
 int main()
 {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     //freopen("output.txt", "w", stdout);
 #endif
-DSC2(n,k);
-if(n - 1 < k){
-    printf("-1\n");
-    return 0;
+while(cin>>n>>m && !(n == 0 && m == 0)){
+    arr.assign(n,"");
+    REP(i,n)
+        cin>> arr[i];
+    int ans = 0;
+    REP(i,n)
+        REP(j,m){
+            if(arr[i][j] == '*'){
+                int count  = 0;
+                REP(k,8){
+                    if(valid(i,j,k))
+                        count++;
+                }
+                // printf(" in %d %d count  = %d\n",i,j,count );
+                if(count  == 0)
+                    ans++;
+            }
+        }
+    printf("%d\n", ans);
 }
-vi arr(n,0);
-REP(i,n)
-    arr[i] = i+1;
 
-int t = n-1;
-for (int i = n-2; i > 0; i-=2)
-{
-    if(t - k <= 1)
-        break;
-    swap(arr[i],arr[i+1]);
-    t-=2;
-}
-if(t-k == 1)
-    swap(arr[0],arr[1]);
-print_v(arr);
+
 return 0; 
 }

@@ -49,6 +49,18 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+vi isprime;
+vi primes;
+void sieve(int n) {
+  isprime.assign(n+2,1);
+  isprime[0] = isprime[1] = 0;
+  for (LL i = 2; i <= n; i++)
+    if (isprime[i]) {
+      for (LL j = i * i; j <= n; j += i) isprime[j] = 0;
+      primes.push_back((int)i);
+    // printf("%lld\n",i );
+    }
+}
 
 int main()
 {
@@ -56,8 +68,25 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+int n;
+sieve(1000000);
+
+int sz = SZ(primes);
+while(cin>>n && n != 0){
+  bool g = true;
+  LOOP(i,1,n){
+    if(primes[i] > (n+1)/2){
+      g = false;
+      break;
+    }
+    if(isprime[n - primes[i]]){
+      printf("%d = %d + %d\n",n,primes[i],n-primes[i]  );
+      break;
+    }    
+  }
+  if(!g)
+    printf("Goldbach's conjecture is wrong.\n");
+}
+
 return 0; 
 }

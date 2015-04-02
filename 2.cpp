@@ -49,6 +49,37 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+LL dp[5003][5003];
+int n,a,b,k;
+int MOD = 1000000007;
+LL back(int x , int t){
+  if(x <= 0 || x > n)
+    return 0;
+
+  if(t == 0)
+   return 1;
+  
+  LL &ans = dp[x][t];
+  if(ans != -1)
+    return ans;
+  int d = abs(x-b);
+  ans =0;
+  LL temp = 0;
+  LOOP(i,1,d){
+    temp = back(x+i , t-1)%MOD;
+    ans+=temp;
+    if(temp == 0)
+      break;
+  }
+  LOOP(i,1,d){
+    temp = back(x-i , t-1)%MOD;
+    ans+=temp;
+    if(temp == 0)
+      break;
+  }
+return ans= ans%MOD;
+
+}
 
 int main()
 {
@@ -56,8 +87,8 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+  cin>>n>>a>>b>>k;
+  CLR(dp,-1);
+  printf("%d\n",(int)(back(a,k)%MOD) );
 return 0; 
 }

@@ -56,8 +56,61 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+int n,m; sc(n);sc(m);
+vi boy(n,0);
+vi girl(m,0);
+int b,g;
+sc(b);
+int x;
+REP(i,b){
+  sc(x);
+  boy[x] = 1;
+}
+sc(g);
+REP(i,g){
+  sc(x);
+  girl[x] =1;
+}
+
+int t = m+n+5;
+while(t--){
+  REP(i,n){
+    if(boy[i])
+      continue;
+    REP(j,m+1){
+      if(girl[(j*n+i)%m]){
+        boy[i] = 1;
+        break;
+      }
+    }
+  }
+  //for girls
+  REP(i,m){
+    if(girl[i])
+      continue;
+    REP(j,n){
+      if(boy[(j*m+i)%n]){
+        girl[i] = 1;
+        break;
+      }
+    }
+  }
+}
+bool go = true;
+REP(i,n)
+  if(!boy[i]){
+    go= false;
+    break;
+  }
+REP(i,m){
+  if(!girl[i]){
+    go= false;
+    break;
+  }
+}
+if(go)
+  printf("Yes\n" );
+else
+  printf("No\n");
 return 0; 
 }

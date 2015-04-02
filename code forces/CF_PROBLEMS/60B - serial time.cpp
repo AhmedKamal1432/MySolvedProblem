@@ -48,7 +48,29 @@ int n = SZ(arr);
 }
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
+vector<VS> arr;
+vector<vector < vector <bool> > >visited;
+int k,n,m;
 
+int dfs(int x,int y,int z){
+  if(visited[x][y][z])
+    return 0;
+  int ans = 1;
+  visited[x][y][z] = true;
+  if(y > 0 && arr[x][y-1][z] == '.')
+    ans+= dfs(x,y-1,z);
+  if(x > 0  && arr[x-1][y][z] == '.')
+      ans+= dfs(x-1,y,z);
+  if(z > 0 && arr[x][y][z-1] == '.')
+      ans+= dfs(x,y,z-1);
+  if(x < k-1 && arr[x+1][y][z] == '.')
+      ans+= dfs(x+1,y,z);
+  if(y < n-1 && arr[x][y+1][z] == '.')
+      ans+= dfs(x,y+1,z);
+  if(z < m-1 && arr[x][y][z+1] == '.')
+      ans+= dfs(x,y,z+1);
+    return ans;
+}
 
 int main()
 {
@@ -56,8 +78,17 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+  cin>>k>>n>>m;
+
+arr.assign(k,VS(n,""));
+visited.assign(k,vector < vector<bool> > (n,vector<bool> (m , false) ) );
+REP(i,k)
+  REP(j,n)
+   cin>>arr[i][j];
+// return 0;
+int x , y;
+sc(x);sc(y);
+int ans = dfs(0,x-1,y-1);
+printf("%d\n", ans);
 return 0; 
 }

@@ -26,7 +26,7 @@ typedef long long int LL ;
 #define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
 #define sc(x) scanf("%d",&x)
-double const EPS = 2.22045e-016;
+double const EPS = 2.22045e-010;
 #define INF (1<<29)
 
 #define ALL(v)        ((v).begin()), ((v).end())
@@ -56,8 +56,32 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+double n , x,y;
+cin>>n>>x>>y;
+vector<double> arr;
+double a,b;
+vi inf(n,0);
+REP(i,n){
+  cin>>a>>b;
+  if(abs(a-x) < EPS){
+    arr.push_back( INF );
+    inf[i] = 1;  
+  }
+  else 
+    arr.push_back( (b-y) / (a-x) );
+}
+int ans = 0;
+REP(i,n){
+  bool g = true;
+  LOOP(j,i+1,n){
+    if(inf[i] == 1 && inf [j] == 1)
+        g= false;
+    else if(abs(arr[i] - arr[j]) < EPS)
+      g = false;
+  }
+  if(g)
+    ans++;
+}
+printf("%d\n",ans );
 return 0; 
 }

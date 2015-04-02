@@ -56,8 +56,50 @@ int main()
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+int n;sc(n);
+vi count(10,0);
+string s;cin>>s;
+REP(i,n){
+  int p = s[i]-'0';
+  if(p == 2 || p == 3 || p == 5 || p == 7)
+    count[p]++;
+  if(p == 4){
+    count[2]+=2;
+    count[3]++;
+  }
+  if(p == 6){
+    count[5]++;
+    count[3]++;
+  }
+  if(p == 8){
+    count[7]++;
+    count[2]+=3;
+  }
+  if(p == 9){
+    count[7]++;
+    count[3]+=2;
+    count[2]++;
+  }
+}
+
+// //4
+// count[2]+=count[4]*2;   
+// count[4] = 0;
+// //6
+// count[3]+=count[6];     count[2]+=count[6];
+// count[6]=0;
+// //8
+// count[2]+=3*count[8]; count[8] = 0;   
+// count[8] = 0;
+// //9
+// count[3]+=2*count[9];
+// count[9]=0;
+
+for (int i = 7; i >=2; --i)
+{
+  REP(k,count[i])
+    printf("%d",i);
+}
+printf("\n");
 return 0; 
 }

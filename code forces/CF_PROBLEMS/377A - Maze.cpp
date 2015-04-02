@@ -49,15 +49,56 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-
+VS arr;
+vector<vector<bool> > visit;
+int n,m,k , cnt ;
+void dfs(int i , int j){
+  if(visit[i][j])
+    return;
+  // printf("cnt = %d i = %d , j = %d\n",cnt ,i,j );
+  if(cnt == 0)
+    return ;
+  visit[i][j] = true;
+  cnt--;
+  if( i > 0 && arr[i-1][j] == '.')
+    dfs(i-1,j);
+  if( j > 0 && arr[i][j-1] == '.')
+    dfs(i,j-1);
+  if( i < n-1 && arr[i+1][j] == '.')
+    dfs(i+1,j);
+  if( j < m-1 && arr[i][j+1] == '.')
+    dfs(i,j+1);
+  return ;
+}
 int main()
 {
 #ifndef ONLINE_JUDGE
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-printf("a = %d '1' = %d\n",'a','1' );
-if(string("aac") < string("cca"))
-  printf("nice\n");
+sc(n);sc(m);sc(k);
+arr.assign(n,"");
+visit.assign(n,vector<bool> (m,false));
+
+REP(i,n)
+  cin>>arr[i];
+int s = 0;
+REP(i,n)
+ REP(j,m)
+  if(arr[i][j] == '.')
+    s++;
+cnt = s-k;
+bool first = true;
+REP(i,n)
+  REP(j,m){
+    if(first && arr[i][j] == '.'){
+      dfs(i,j);
+      first = false;
+    }
+    if(arr[i][j] == '.' && ! visit[i][j])
+      arr[i][j] = 'X';
+  }
+REP(i,n)
+  cout<<arr[i]<<endl;
 return 0; 
 }
