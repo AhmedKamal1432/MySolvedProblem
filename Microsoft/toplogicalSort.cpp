@@ -50,63 +50,58 @@ int n = SZ(arr);
     if(i == n-1)
        printf("%d\n",arr[i] );
      else
-      printf("%d ", arr[i]);
+      printf("%d,", arr[i]);
 }
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-void create(){
-}
+int visit[1000];
 int main()
 {
 #ifndef ONLINE_JUDGE
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-DSC(n);
-string s;
-cin>>s;
-vi ans(10,0);
-REP(i,n){
-  if(s[i] == '2'){
-    ans[2]++;
-  }
-  if(s[i] == '3'){
-    ans[3]++;
-  }
-  if(s[i] == '4'){
-    ans[2]+=2;
-    ans[3]++;
-  }
-  if(s[i] == '5'){
-    ans[5]++;
-  }
-  if(s[i] == '6'){
-    ans[5]++;
-    ans[3]++;
-  }
-  if(s[i] == '7'){
-    ans[7]++;
-  }
-  if(s[i] == '8'){
-    ans[7]++;
-    ans[2]+=3;
-  }
-  if(s[i] == '9'){
-    ans[7]++;
-    ans[3]+=2;
-    ans[2]++;
-  }
-
+int st; string line; stringstream ss;
+getline(cin,line);
+line.push_back(',');
+ss<<line;
+int MAX = 100;
+vector<vector<bool> > gr(MAX,vector<bool>(MAX,false));
+int a,b;
+char c;
+vi found(1000,0);
+while(ss>>a>>b>>c){
+  // printf("%d %d %c\n",a,b,c);
+  gr[a][b]=true;
+  found[a]=found[b]=1;
 }
-string b;
-REP(i,10){
-  REP(k,ans[i])
-    b.PB(i+'0');
-}
-sort(ALL(b));
-reverse(ALL(b));
-cout<<b<<endl;
+CLR(visit,false);
+vi arr;
+REP(i,MAX){
+  REP(k,MAX){
+    if(visit[k])
+      continue;
+    if(!found[k])
+      continue;
 
+    int g = true;
+    REP(m,MAX){
+      if(gr[k][m]){
+        g = false;
+        break;
+      }
+    }
+    if(g){
+      REP(m,MAX){
+        gr[m][k] = false;
+      }
+      arr.push_back(k);
+      visit[k]=true;
+      break;
+    }
+  }
+}
+print_v(arr);
 return 0; 
 }

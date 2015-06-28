@@ -55,58 +55,77 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-void create(){
-}
+
 int main()
 {
 #ifndef ONLINE_JUDGE
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-DSC(n);
-string s;
-cin>>s;
-vi ans(10,0);
-REP(i,n){
-  if(s[i] == '2'){
-    ans[2]++;
-  }
-  if(s[i] == '3'){
-    ans[3]++;
-  }
-  if(s[i] == '4'){
-    ans[2]+=2;
-    ans[3]++;
-  }
-  if(s[i] == '5'){
-    ans[5]++;
-  }
-  if(s[i] == '6'){
-    ans[5]++;
-    ans[3]++;
-  }
-  if(s[i] == '7'){
-    ans[7]++;
-  }
-  if(s[i] == '8'){
-    ans[7]++;
-    ans[2]+=3;
-  }
-  if(s[i] == '9'){
-    ans[7]++;
-    ans[3]+=2;
-    ans[2]++;
-  }
+string a,b,c;
+cin>>a>>b>>c;
+vi a_h(30,0),b_h(30,0),c_h(30,0);
+REP(i,SZ(a))
+  a_h[a[i]-'a']++;
+REP(i,SZ(b))
+  b_h[b[i]-'a']++;
+REP(i,SZ(c))
+  c_h[c[i]-'a']++;
+int const MAX = 100005;
 
-}
-string b;
-REP(i,10){
-  REP(k,ans[i])
-    b.PB(i+'0');
-}
-sort(ALL(b));
-reverse(ALL(b));
-cout<<b<<endl;
+int ans1,ans2 =  0;
+REP(t,MAX){
+  // take from b t
 
+  vi a_temp(a_h);
+  bool g = true;
+  REP(i,30){
+    if(b_h[i] * t > a_temp[i]){
+    // printf("b exceed at t = %d\n",t );
+      g = false;
+      break;
+    }
+    a_temp[i] -= b_h[i] * t;  
+  }
+  if(!g)
+    break;
+  g = true;
+  int mn = MAX;
+  
+  REP(i,30){
+    if(c_h[i]  > a_temp[i]){
+      g = false;
+      break;
+    }
+    if(c_h[i] != 0)
+      mn = min(mn,a_temp[i]/c_h[i]);
+  }
+  if(mn == MAX || !g)
+    mn = 0;
+  // printf("t = %d mn = %d ans1 = %d  ans2 = %d\n", t,mn,ans1,ans2);
+  if( ans2 + ans1 < t+mn ){
+    // printf("maxi %d %d\n", ans1 , ans2);
+    ans1 = t;
+    ans2 = mn;
+  }
+  
+}
+
+REP(i,30){
+  a_h[i] -= (b_h[i] * ans1  +  c_h[i] * ans2);
+}
+
+// printf("%d %d\n", ans1 , ans2);
+REP(i,ans1)
+  cout<<b;
+REP(i,ans2)
+  cout<<c;
+
+REP(i,30){
+  REP(k,a_h[i])
+    printf("%c",i+'a' );
+}
+
+printf("\n");
 return 0; 
 }

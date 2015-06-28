@@ -26,17 +26,17 @@ typedef long long int LL ;
 #define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
 
-#define ALL(v)				((v).begin()), ((v).end())
-#define SZ(v)				((int)((v).size()))
-#define CLR(v, d)			memset(v, d, sizeof(v))
-#define REP(i, n)		for(int i=0;i<(int)(n);++i)
-#define LOOP(i,b, n)		for(int i=(b);i<(int)(n);++i)
+#define ALL(v)        ((v).begin()), ((v).end())
+#define SZ(v)       ((int)((v).size()))
+#define CLR(v, d)     memset(v, d, sizeof(v))
+#define REP(i, n)   for(int i=0;i<(int)(n);++i)
+#define LOOP(i,b, n)    for(int i=(b);i<(int)(n);++i)
 
 #define sc(x) scanf("%d",&x)
 #define DSC(x) int x; scanf("%d",&x)
 #define DSC2(x,y) int x,y; scanf("%d %d",&x,&y)
 
-#define PB	push_back
+#define PB  push_back
 #define MP  make_pair
 double const EPS = 2.22045e-016;
 #define INF (1<<29)
@@ -55,13 +55,36 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+bool com(ii a, ii b){
+  if(a.first+ a.second == b.first + b.second)
+      return a.first < b.first;
+  return  a.first+ a.second < b.first + b.second;
+}
 
 int main()
 {
 #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+  freopen("input.txt", "r", stdin);
+  //freopen("output.txt", "w", stdout);
 #endif
+vii arr;
+DSC(n);
+REP(i,n){
+  if(i*7 > n)
+      break;
+  if((n- i*7)%4 == 0)
+    arr.push_back(MP(i,(n- i*7)/4));  
+}
+if(SZ(arr) == 0){
+  printf("-1\n");
+  return 0;
+}
 
+ii ans = *min_element(ALL(arr),com);
+REP(i,ans.second)
+  printf("4");
+REP(i,ans.first)
+  printf("7");
+printf("\n");
 return 0; 
 }

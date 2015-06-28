@@ -26,17 +26,17 @@ typedef long long int LL ;
 #define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
 
-#define ALL(v)				((v).begin()), ((v).end())
-#define SZ(v)				((int)((v).size()))
-#define CLR(v, d)			memset(v, d, sizeof(v))
-#define REP(i, n)		for(int i=0;i<(int)(n);++i)
-#define LOOP(i,b, n)		for(int i=(b);i<(int)(n);++i)
+#define ALL(v)        ((v).begin()), ((v).end())
+#define SZ(v)       ((int)((v).size()))
+#define CLR(v, d)     memset(v, d, sizeof(v))
+#define REP(i, n)   for(int i=0;i<(int)(n);++i)
+#define LOOP(i,b, n)    for(int i=(b);i<(int)(n);++i)
 
 #define sc(x) scanf("%d",&x)
 #define DSC(x) int x; scanf("%d",&x)
 #define DSC2(x,y) int x,y; scanf("%d %d",&x,&y)
 
-#define PB	push_back
+#define PB  push_back
 #define MP  make_pair
 double const EPS = 2.22045e-016;
 #define INF (1<<29)
@@ -55,13 +55,46 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+int visit[10000];
+vector<vi> gr; 
+int dfs(int k){
+  if(visit[k])
+    return 0;
+  int ans = -1;
+  visit[k] = true;
+  REP(i,SZ(gr[k])){
+    ans = max(ans,dfs(gr[k][i]));
+  }
+  return ans+1;
+}
 
 int main()
 {
 #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+  freopen("input.txt", "r", stdin);
+  //freopen("output.txt", "w", stdout);
 #endif
+  int MAX = 100000;
+  gr.assign(MAX,vi());
+  int st; sc(st); scanf("\n");
+  stringstream ss;
+  string line;
 
+  int a,b;
+  while(sc(a) != EOF){
+      // printf("%d\n",a );
+      scanf(";");
+      getline(cin,line);
+      ss<<line;
+      while(ss>>b){
+        // printf("%d %d\n",a,b );
+        gr[a].push_back(b);
+        gr[b].push_back(a);
+
+      }
+      ss.clear();
+  }
+  CLR(visit,false);
+  printf("%d\n",dfs(st) );
 return 0; 
 }

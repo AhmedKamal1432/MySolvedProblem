@@ -21,7 +21,8 @@
 
 using namespace std;
 
-typedef long long int LL ;
+typedef long long int LL;
+typedef long long int ll;
 #define vi vector<int> 
 #define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
@@ -40,6 +41,7 @@ typedef long long int LL ;
 #define MP  make_pair
 double const EPS = 2.22045e-016;
 #define INF (1<<29)
+#define MOD 1000000007
 
 
 typedef vector<double>    VD;
@@ -55,58 +57,49 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-void create(){
+
+// t=0 => W
+// t=1 => R
+int k, n;
+
+ll dp[100010][5];
+ll rec(int i, int t){
+  if(i > n) return 0;
+  if(i == n) return 1;
+  if(dp[i][t] != -1) return dp[i][t];
+
+  ll ans = 0;
+  if(t == 0) {
+    ans = rec(i+k, 1) % MOD + rec(i+k , 0)%MOD;
+  }
+  else {
+    ans = rec(i+1, 0) % MOD + rec(i+1, 1) % MOD;
+  }
+  return dp[i][t] = ans % MOD;
 }
+
+
 int main()
 {
 #ifndef ONLINE_JUDGE
   freopen("input.txt", "r", stdin);
   //freopen("output.txt", "w", stdout);
 #endif
-DSC(n);
-string s;
-cin>>s;
-vi ans(10,0);
-REP(i,n){
-  if(s[i] == '2'){
-    ans[2]++;
-  }
-  if(s[i] == '3'){
-    ans[3]++;
-  }
-  if(s[i] == '4'){
-    ans[2]+=2;
-    ans[3]++;
-  }
-  if(s[i] == '5'){
-    ans[5]++;
-  }
-  if(s[i] == '6'){
-    ans[5]++;
-    ans[3]++;
-  }
-  if(s[i] == '7'){
-    ans[7]++;
-  }
-  if(s[i] == '8'){
-    ans[7]++;
-    ans[2]+=3;
-  }
-  if(s[i] == '9'){
-    ans[7]++;
-    ans[3]+=2;
-    ans[2]++;
-  }
 
-}
-string b;
-REP(i,10){
-  REP(k,ans[i])
-    b.PB(i+'0');
-}
-sort(ALL(b));
-reverse(ALL(b));
-cout<<b<<endl;
+  memset(dp, -1, sizeof dp);
 
-return 0; 
+  int t;
+  sc(t); sc(k);
+  while(t-- > 0){
+    int low, high;
+    sc(low); sc(high);
+    ll ans = 0;
+    LOOP(j, low, high+1){
+      n = j;
+      ans += rec(0, 0)%MOD + rec(0, 1)%MOD;
+      ans %= MOD;
+    }
+    printf("%lld\n", ans);
+  }
+  return 0; 
 }

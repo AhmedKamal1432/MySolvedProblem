@@ -55,7 +55,10 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
-void create(){
+bool com(ii a, ii b){
+  if( (LL) abs(a.first)+(LL)abs(a.second) > (LL)abs(b.first)+(LL)abs(b.second))
+    return false;
+  return true;
 }
 int main()
 {
@@ -64,49 +67,66 @@ int main()
   //freopen("output.txt", "w", stdout);
 #endif
 DSC(n);
-string s;
-cin>>s;
-vi ans(10,0);
+vii arr(n,ii(0,0));
 REP(i,n){
-  if(s[i] == '2'){
-    ans[2]++;
+  sc(arr[i].first);
+  sc(arr[i].second);
+}
+sort(ALL(arr),com);
+
+VS ans;
+int k = 0;
+REP(i,n){
+  int x = arr[i].first, y= arr[i].second;
+  stringstream ssx,ssy;
+  ssx<<abs(x); ssy<<abs(y);
+  string sx,sy;
+  ssx>>sx; ssy>>sy;
+
+  if(x > 0){
+    k++;
+    ans.PB("1 "+sx+" R\n");
   }
-  if(s[i] == '3'){
-    ans[3]++;
-  }
-  if(s[i] == '4'){
-    ans[2]+=2;
-    ans[3]++;
-  }
-  if(s[i] == '5'){
-    ans[5]++;
-  }
-  if(s[i] == '6'){
-    ans[5]++;
-    ans[3]++;
-  }
-  if(s[i] == '7'){
-    ans[7]++;
-  }
-  if(s[i] == '8'){
-    ans[7]++;
-    ans[2]+=3;
-  }
-  if(s[i] == '9'){
-    ans[7]++;
-    ans[3]+=2;
-    ans[2]++;
+  else if( x != 0){
+    k++;
+    ans.PB("1 "+sx+" L\n");
   }
 
-}
-string b;
-REP(i,10){
-  REP(k,ans[i])
-    b.PB(i+'0');
-}
-sort(ALL(b));
-reverse(ALL(b));
-cout<<b<<endl;
+  if(y > 0){
+    k++;
+    ans.PB("1 "+sy+" U\n");
+  }
+  else if(y != 0){
+    k++;
+    ans.PB("1 "+sy+" D\n");
+  }
+  k++;
+  ans.PB("2\n");
 
+  if(x < 0){
+    k++;
+    ans.PB("1 "+sx+" R\n");
+  }
+  else if(x != 0){
+    k++;
+    ans.PB("1 "+sx+" L\n");
+  }
+
+  if(y < 0){
+    k++;
+    ans.PB("1 "+sy+" U\n");
+  }
+  else if(y != 0){
+    k++;
+    ans.PB("1 "+sy+" D\n");
+  }
+
+  k++;
+  ans.PB("3\n");
+
+}
+printf("%d\n",k );
+REP(i,SZ(ans))
+  cout<<ans[i];
 return 0; 
 }

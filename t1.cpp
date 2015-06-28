@@ -26,17 +26,17 @@ typedef long long int LL ;
 #define ii pair<int,int> 
 #define vii vector< pair<int,int> > 
 
-#define ALL(v)				((v).begin()), ((v).end())
-#define SZ(v)				((int)((v).size()))
-#define CLR(v, d)			memset(v, d, sizeof(v))
-#define REP(i, n)		for(int i=0;i<(int)(n);++i)
-#define LOOP(i,b, n)		for(int i=(b);i<(int)(n);++i)
+#define ALL(v)        ((v).begin()), ((v).end())
+#define SZ(v)       ((int)((v).size()))
+#define CLR(v, d)     memset(v, d, sizeof(v))
+#define REP(i, n)   for(int i=0;i<(int)(n);++i)
+#define LOOP(i,b, n)    for(int i=(b);i<(int)(n);++i)
 
 #define sc(x) scanf("%d",&x)
 #define DSC(x) int x; scanf("%d",&x)
 #define DSC2(x,y) int x,y; scanf("%d %d",&x,&y)
 
-#define PB	push_back
+#define PB  push_back
 #define MP  make_pair
 double const EPS = 2.22045e-016;
 #define INF (1<<29)
@@ -59,9 +59,28 @@ int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 int main()
 {
 #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+  freopen("input.txt", "r", stdin);
+  //freopen("output.txt", "w", stdout);
 #endif
 
+DSC(n);
+vi arr(n,0);
+REP(i,n)
+  sc(arr[i]);
+vi s_arr(arr) ;
+sort(ALL(s_arr));
+reverse(ALL(s_arr));
+// print_v(s_arr);
+vi ans_arr(n,0);
+REP(i,n){
+  int k = arr[i];
+  REP(j,n){
+    if(s_arr[j] == k){
+      ans_arr[i] = j+1;
+      break;
+    }
+  }
+}
+print_v(ans_arr);
 return 0; 
 }
