@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -43,6 +55,8 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+std::vector<vi> gr;
+vi visit;
 
 int main()
 {
@@ -50,6 +64,37 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
+		DSC(T);
+		REP(t,T){
+			DSC2(n,k);
+			DSC(m);
+			gr.assign(n,vi());
+			visit.assign(n,0);
+			REP(i,m){
+				DSC2(x,y);
+				gr[x-1].push_back(y-1);
+				gr[y-1].push_back(x-1);
+			}
+			vi ans(n, 0);
+			REP(i,n)
+				if(SZ(gr[i]) >= k)
+					ans[i]=1;
+			REP(i,SZ(ans)){
+				int count = 0;
+				REP(f,SZ(gr[i])){
+					if( ans[gr[i][f] ])
+						count++;
+				}
+				// printf("at i = %d count %d\n",i, count );
+				if(count < k)
+					ans[i] = 0;
+			}
+			int count =0;
+			REP(i,n)
+				if(ans[i])
+					count++;
+			printf("%d\n",count );
+		}
 
 	return 0; 
 }

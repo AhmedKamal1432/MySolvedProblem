@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -50,6 +62,25 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
-
+		int n,r;
+		while(cin >>n >>r){
+			vi arr(r,0);
+			REP(i,r){
+				sc(arr[i]);
+			}
+			sort(ALL(arr));
+			if(n == r){
+				printf("*\n");
+				continue;
+			}
+			int k = 0;
+			REP(i,n){
+				if(arr[k] == i+1)
+					k++;
+				else
+					printf("%d ",i+1 );
+			}
+			printf("\n");
+		}
 	return 0; 
 }

@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -43,6 +55,16 @@ int n = SZ(arr);
 
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
+vector<vi > AdjList;
+vi visit;
+void dfs(int u){
+	if(visit[u])
+		return;
+	visit[u] = 1;;
+	REP(i,SZ(AdjList[u])){
+		dfs(AdjList[u][i]);
+	}
+}
 
 int main()
 {
@@ -50,6 +72,22 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
-
+		int n,k,m;
+		cin>>n>>k>>m;
+		AdjList.assign(n,vi());
+		REP(i,k){
+			DSC2(x,y);
+			AdjList[x-1].push_back(y-1);
+			AdjList[y-1].push_back(x-1);
+		}
+		visit.assign(n,0);
+		int comp = 0;
+		REP(i,n){
+			if(!visit[i]){
+				dfs(i);
+				comp++;
+			}
+		}
+		printf("%d\n",comp-1 );
 	return 0; 
 }

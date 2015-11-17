@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -41,7 +53,7 @@ int n = SZ(arr);
       cout<<arr[i]<<" ";
 }
 
-int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
+LL gcd(LL a, LL b) { return (b == 0 ? a : gcd(b, a % b)); }
 
 
 int main()
@@ -50,6 +62,20 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
-
+		DSC(T);
+		REP(t,T){
+			LL h,l;
+			cin>>h>>l;
+			LL ans = 0; 
+			REP(i,h+1){
+				if(1LL << i >= l){
+					ans+= (h-i+1) *l;
+					break;
+				}
+				else
+					ans+=1LL << i;
+			}
+			printf("Case %d: %lld\n",t+1,ans );
+		}
 	return 0; 
 }

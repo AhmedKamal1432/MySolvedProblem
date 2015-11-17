@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -50,6 +62,47 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
+		DSC(t);
+		while(t--){
+			DSC2(n,m);
+			vector<vi> arr(n,vi(m,0));
+			REP(i,n){
+				REP(j,m){
+					sc(arr[i][j]);
+					if(arr[i][j] == -1)
+						arr[i][j] = 0;
+				}
+			}
 
+			int ans = 0;
+			if(m&1){
+				bool k = false;
+				REP(i,n){
+					REP(j,m){
+						if(k)
+							ans += arr[i][j];
+						else
+							ans -= arr[i][j];
+						k = !k;
+					}
+				}
+			}
+			else{
+				bool k = false;
+				REP(i,n){
+					k = !k;
+					REP(j,m){
+						if(k)
+							ans += arr[i][j];
+						else
+							ans -= arr[i][j];
+						k = !k;
+					}
+				}
+
+			}
+
+			printf("%d\n",abs(ans) );
+		}
 	return 0; 
 }

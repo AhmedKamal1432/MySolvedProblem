@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -50,6 +62,31 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
-
+		DSC(T);
+		vi square;
+		int i = 1;
+		while(i*(i+1)/2 < 1002 ){
+			square.push_back(i*(i+1)/2);
+			i++;
+		}
+		// printf("square %d\n", square[0]);
+		int n = SZ(square);
+		REP(t,T){
+			DSC(x);
+			// printf("%d\n",x );
+			int g = 0;
+			REP(i,n){
+				REP(k,n){
+					if(binary_search(ALL(square), (x - square[i] -  square[k])) ) {
+						// printf("%d %d %d\n", square[i] ,  square[k], x - square[i] -  square[k] );
+						g = 1;
+						break;
+					}
+				}
+				if(g)
+					break;
+			}
+			printf("%d\n",g );
+		}
 	return 0; 
 }

@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -50,6 +62,42 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
+		int x;
+		while(cin >>x){
+			vi arr(3,0);
+			arr[0]  = x;
+			int z=0,o = 0;
+			if(arr[0] == 0)
+				z++;
+			else
+				o++;	
+			LOOP(i,1,3){
+				sc(arr[i]);
 
+				if(arr[i] == 0)
+					z++;
+				else
+					o++;	
+			}
+			if(z == 0 || z == 3){
+				printf("*\n");
+			}
+			else if(z == 1){
+				REP(i,3){
+					if(arr[i] == 0){
+						printf("%c\n",i+'A' );
+						continue;
+					}
+				}
+			}
+			else{
+				REP(i,3){
+					if(arr[i] == 1){
+						printf("%c\n",i+'A' );
+						continue;
+					}
+				}
+			}
+		}
 	return 0; 
 }

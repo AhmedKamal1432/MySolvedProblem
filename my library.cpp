@@ -17,6 +17,14 @@ void pascal_triangle(int n){
   }
 }
 
+/*
+
+At first, let's find edges that do not belong to any shortest paths from s to t.
+Let's find two shortest path arrays d1 and d2 with any shortest-path-finding algorithm. First array stores shortest path length from s, and the second — from t.
+then Edge (u, v) will be on at least one shortest path from s to t if and only if d1[u] + w(u, v) + d2[v] == d1[t].
+
+*/
+
 ///////////////////////////////////////////////////////////////
 //accumalitor 2d array
 int ac[MAX][MAX];

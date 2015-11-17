@@ -2,16 +2,28 @@
 *
 * solved by Ahmed Kamal
 */
-// clang++ -std=c++11 ps.cpp
-
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <bitset>
+#include <queue>
+#include <stack>
+#include <utility>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
 typedef long long int LL ;
 #define vi vector<int> 
 #define ii pair<int,int> 
-#define PLL pair<LL,LL> 
 #define vii vector< pair<int,int> > 
 
 #define ALL(v)				((v).begin()), ((v).end())
@@ -44,12 +56,43 @@ int n = SZ(arr);
 int gcd(int a, int b) { return (b == 0 ? a : gcd(b, a % b)); }
 
 
+std::vector<vi> gr;
+vi visit;
+int dfs(int u){
+	if(visit[u])
+		return 0;
+	visit[u] = true;
+	REP(i,SZ(gr[u])){
+		dfs(gr[u][i]);
+	}
+	return 0;
+}
+
 int main()
 {
-	#ifndef ONLINE_JUDGE
+	#ifndef ONLINE_JUDntGE
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
+		DSC(T);
+		REP(t,T){
+			DSC(n);
+			gr.assign(n,vi());
+			visit.assign(n,0);
+			REP(i,n){
+				int x;
+				sc(x);
+				gr[i].push_back(x-1);
+			}
 
+			int cc = 0;
+			REP(i,n){
+				if(! visit[i]){
+					dfs(i);
+					cc++;
+				}
+			}
+			printf("%d\n",cc );
+		}
 	return 0; 
 }

@@ -50,6 +50,29 @@ int main()
 		freopen("input.txt", "r", stdin);
 		//freopen("output.txt", "w", stdout);
 	#endif
-
+		int n,m;
+		const int  MAX = 1123456;
+		while(cin >> n){
+			cin>>m;
+			vi arr(m,0);
+			REP(i,m){
+				sc(arr[i]);
+			}
+			sort(ALL(arr));
+			vi play(MAX, 0);
+			LOOP(i,1,n+1){
+				int g = false;
+				REP(k,m){
+					if(arr[k] <= i)
+						g |= !(play[i-arr[k]]);
+				}
+				if(g)
+					play[i] = 1;
+			}
+			if(play[n])
+				printf("Stan wins\n");
+			else
+				printf("Ollie wins\n");
+		}
 	return 0; 
 }
